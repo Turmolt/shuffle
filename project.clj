@@ -5,9 +5,11 @@
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [compojure "1.6.1"]
                  [ring/ring-defaults "0.3.2"]
+                 [ring/ring-jetty-adapter "1.6.3"]
                  [org.clojure/data.json "1.0.0"]
                  [org.clojure/core.async "1.2.603"]
-                 [clj-http "3.10.1"]]
+                 [clj-http "3.10.1"]
+                 [vault "1.0.0"]]
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler shuffle.handler/app}
   :profiles
