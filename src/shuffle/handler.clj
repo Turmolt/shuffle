@@ -8,14 +8,26 @@
 
 (def hook-url (vault :hook-url))
 
-(defn post-to-slack [url msg]
-  (client/post url {:body (json/write-str msg)
-                    :content-type :json}))
+(def token (vault :token))
+
+(defn slack 
+  ([] "https://slack.com/api/")
+  ([method] (str "https://slack.com/api/" method)))
+
+(defn post-to-slack [channel message]
+  (client/post (slack "chat.postMessage")
+               {:query-params {:token token
+                               :channel channel
+                               :text message}}))
+
+(defn slack-handler [req]
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body (str (:params req))})
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
+  (POST "/slack"  [] slack-handler)
+  (GET "/slack" [] slack-handler)
   (route/not-found "Not Found"))
 
-(def app
-  (wrap-defaults app-routes site-defaults))
-
+(def app (wrap-defaults app-routes site-defaults))
