@@ -29,12 +29,6 @@
    :headers {"Content-Type" "text/html"}
    :body body})
 
-(defn pad [text min-length]
-  (->> (repeat (- min-length (count text)) " ")
-       (string/join)
-       (vector text)
-       (reduce str)))
-
 (defn add-person [text]
   (let [parsed (string/split text #" ")]
     (if (not (= 4 (count parsed)))
@@ -44,8 +38,10 @@
            (g/add-person!)
            (map g/display-person)
            (string/join "\n")
+           (#(str "```" (g/pad "NAME" 40) (g/pad "ROLE" 40) "OFFICE\n" % " ```"))
            (response 200)))))
 
+(format "%s" "s")
 
 (defn clear[]
   (g/clear!)
@@ -58,9 +54,18 @@
          (response 200))
     (response 400 "Enter a valid key. Keys: office, role")))
 
+(deal :office)
+
 (defn set-groups [n]
   (g/set-ngroups! n)
   (response 200 (str "Set number of groups to " n ".")))
+
+(defn post-results [channel]
+  (let [results (g/results)]
+    (if (nil? results)
+      (response 400 "Add people and call deal to produce results, then you can post them.")
+      (do (post-to-slack channel (str results))
+          (response 200 (str "Results posted to " channel "."))))))
 
 (defn process-message [{:keys [command text] :as request}]
   (cond 
@@ -68,6 +73,7 @@
     (= command "/clear")  (clear)
     (= command "/groups") (set-groups (Integer/parseInt text))
     (= command "/deal")   (g/deal (keyword (string/lower-case text)))
+    (= command "/post")   (post-results text)
     :else (response 400 "Please enter a valid command.")))
 
 (defn slack-handler [{:keys [params]}]

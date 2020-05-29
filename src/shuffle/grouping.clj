@@ -3,6 +3,7 @@
 
 (def people (atom []))
 (def ngroups (atom 4))
+(def groups (atom nil))
 
 (defrecord Person [name role office])
 
@@ -14,9 +15,17 @@
 
 (defn set-ngroups! [n] (reset! ngroups n))
 
+(defn pad [text min-length]
+  (->> (repeat (- min-length (count text)) " ")
+       (string/join)
+       (vector text)
+       (reduce str)))
+
+(defn results [] @groups)
+
 (defn display-person
   [{:keys [name role office]}]
-  (string/join ", " [name role office]))
+  (str (pad name 40) (pad role 40) office))
 
 (defn create-person [[name role dev]]
   (Person. name role dev))
@@ -61,10 +70,10 @@
        (map-indexed
         (fn [idx itm]
           (->> (map display-person itm)
-               (string/join " & ")
-               (str "Group " (inc idx) ": "))))
-       (string/join "\n")))
-
+               (string/join "\n")
+               (#(str "*Group " (inc idx) ":*\n```" (if (not-empty %) % "-") "```\n")))))
+       (string/join "\n")
+       (reset! groups)))
 
 ;==========================================================================
 
