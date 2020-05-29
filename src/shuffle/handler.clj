@@ -3,12 +3,16 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [clj-http.client :as client]
-            [clojure.data.json :as json]
-            [vault.core :refer [vault]]))
+            [ring.adapter.jetty :refer [run-jetty]]
+            [vault.core :refer [vault]]
+            [shuffle.grouping :as g]
+            [clojure.string :as string]))
 
 (def hook-url (vault :hook-url))
 
 (def token (vault :token))
+
+(def auth-token (vault :secret))
 
 (defn slack 
   ([] "https://slack.com/api/")
@@ -20,10 +24,56 @@
                                :channel channel
                                :text message}}))
 
-(defn slack-handler [req]
-  {:status 200
+(defn response [status body]
+  {:status status
    :headers {"Content-Type" "text/html"}
-   :body (str (:params req))})
+   :body body})
+
+(defn pad [text min-length]
+  (->> (repeat (- min-length (count text)) " ")
+       (string/join)
+       (vector text)
+       (reduce str)))
+
+(defn add-person [text]
+  (let [parsed (string/split text #" ")]
+    (if (not (= 4 (count parsed)))
+      (response 200 "Please enter the first name, last name, role and office of the person you wish to add.")
+      (->> [(str (first parsed) " " (second parsed)) (nth parsed 2) (last parsed)]
+           (g/create-person)
+           (g/add-person!)
+           (map g/display-person)
+           (string/join "\n")
+           (response 200)))))
+
+
+(defn clear[]
+  (g/clear!)
+  (response 200 "Cleared the list of people."))
+
+(defn deal [key]
+  (if (some #{key} [:role :office])
+    (->> (g/deal key)
+         (str)
+         (response 200))
+    (response 400 "Enter a valid key. Keys: office, role")))
+
+(defn set-groups [n]
+  (g/set-ngroups! n)
+  (response 200 (str "Set number of groups to " n ".")))
+
+(defn process-message [{:keys [command text] :as request}]
+  (cond 
+    (= command "/add")    (add-person text)
+    (= command "/clear")  (clear)
+    (= command "/groups") (set-groups (Integer/parseInt text))
+    (= command "/deal")   (g/deal (keyword (string/lower-case text)))
+    :else (response 400 "Please enter a valid command.")))
+
+(defn slack-handler [{:keys [params]}]
+  (if (= auth-token (:token params))
+    (process-message params)
+    (response 400 (str "Invalid Request"))))
 
 (defroutes app-routes
   (POST "/slack"  [] slack-handler)
@@ -31,3 +81,13 @@
   (route/not-found "Not Found!"))
 
 (def app (wrap-defaults app-routes api-defaults))
+
+(defn -main [& args]
+  (let [port 8080]
+    (run-jetty app {:port port :join? false})
+    (println (str "Running on port " port))))
+
+(comment (client/post "http://localhost:3000/slack" 
+                      {:query-params {:token auth-token 
+                                      :command "/add" 
+                                      :text "sam gates dev maine"}}))
