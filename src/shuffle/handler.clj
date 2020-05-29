@@ -1,7 +1,7 @@
 (ns shuffle.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [clj-http.client :as client]
             [clojure.data.json :as json]
             [vault.core :refer [vault]]))
@@ -28,6 +28,6 @@
 (defroutes app-routes
   (POST "/slack"  [] slack-handler)
   (GET "/slack" [] slack-handler)
-  (route/not-found "Not Found"))
+  (route/not-found "Not Found!"))
 
-(def app (wrap-defaults app-routes site-defaults))
+(def app (wrap-defaults app-routes api-defaults))
