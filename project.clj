@@ -7,10 +7,16 @@
                  [ring/ring-defaults "0.3.2"]
                  [ring/ring-jetty-adapter "1.6.3"]
                  [org.clojure/data.json "1.0.0"]
-                 [clj-http "3.10.1"]
-                 [vault "1.0.0"]]
-  :plugins [[lein-ring "0.12.5"]]
+                 [environ "1.2.0"]
+                 [clj-http "3.10.1"]]
+  :main ^:skip-aot shuffle.handler
+  :uberjar-name "shuffle-standalone.jar"
+  :plugins [[lein-ring "0.12.5"]
+            [lein-environ "1.2.0"]]
   :ring {:handler shuffle.handler/app}
   :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.2"]]}})
+  {:dev [:project/dev :profiles/dev]
+   :project/dev  {:dependencies [[javax.servlet/servlet-api "2.5"]
+                                 [ring/ring-mock "0.3.2"]]}
+   :profiles/dev {}
+   :uberjar {:aot :all}})

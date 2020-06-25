@@ -1,17 +1,17 @@
 (ns shuffle.grouping
   (:require [clojure.string :as string]))
 
-(def people (atom []))
+(def items (atom []))
 (def ngroups (atom 4))
 (def groups (atom nil))
 
-(defrecord Person [name role office])
+(defrecord Item [name key])
 
 (defn clear! []
-  (reset! people []))
+  (reset! items []))
 
-(defn add-person! [person]
-  (swap! people conj person))
+(defn add-item! [item]
+  (swap! items conj item))
 
 (defn set-ngroups! [n] (reset! ngroups n))
 
@@ -23,19 +23,19 @@
 
 (defn results [] @groups)
 
-(defn display-person
-  [{:keys [name role office]}]
-  (str (pad name 40) (pad role 40) office))
+(defn display-item
+  [{:keys [name key]}]
+  (str (pad name 40) key))
 
-(defn create-person [[name role dev]]
-  (Person. name role dev))
+(defn create-item [[name key]]
+  (Item. name key))
 
 (defn split 
-  "split by a key then shuffle
+  "split by the key then shuffle
    result is sorted by size"
-  [coll key]
-  (->> (sort-by key coll)
-       (partition-by key)
+  [coll]
+  (->> (sort-by :key coll)
+       (partition-by :key)
        (sort-by count)
        (map shuffle)))
 
@@ -43,8 +43,8 @@
   (assoc coll idx (conj (nth coll idx) itm)))
 
 (defn split-into-groups
-  [coll key]
-  (let [sorted (split coll key)]
+  [coll]
+  (let [sorted (split coll)]
     (loop [pool    (rest sorted)
            hand    (first sorted)
            result  (into [] (take @ngroups (repeat [])))
@@ -65,11 +65,11 @@
           
           result)))))
 
-(defn deal [key]
-  (->> (split-into-groups @people key)
+(defn deal []
+  (->> (split-into-groups @items)
        (map-indexed
         (fn [idx itm]
-          (->> (map display-person itm)
+          (->> (map display-item itm)
                (string/join "\n")
                (#(str "*Group " (inc idx) ":*\n```" (if (not-empty %) % "-") "```\n")))))
        (string/join "\n")
@@ -82,6 +82,6 @@
 (def offices ["pdx" "sf"])
 
 (defn random-person []
-  (Person. (rand-nth names) (rand-nth roles) (rand-nth offices)))
+  (Item. (rand-nth names) (rand-nth offices)))
 
-(comment (repeatedly 20 #(add-person! (random-person))))
+(comment (repeatedly 20 #(add-item! (random-person))))
