@@ -41,6 +41,14 @@
            (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
            (response 200)))))
 
+(defn add-id [text]
+  (if (< 0 (count text))
+    (->> (g/add-id! text)
+         (string/join "\n")
+         (#(str "```" % "```") )
+         (response 200))
+    (response 400 "Please send an id to add.")))
+
 (defn clear[]
   (g/clear!)
   (response 200 "Cleared the list of people."))
@@ -67,6 +75,7 @@
     (= command "/clear")  (clear)
     (= command "/groups") (set-groups (Integer/parseInt text))
     (= command "/deal")   (g/deal)
+    (= command "/add-id") (add-id text)
     (= command "/post")   (post-results text)
     :else (response 400 "Please enter a valid command.")))
 

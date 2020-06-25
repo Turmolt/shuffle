@@ -4,14 +4,21 @@
 (def items (atom []))
 (def ngroups (atom 4))
 (def groups (atom nil))
+(def ids (atom []))
 
 (defrecord Item [name key])
 
 (defn clear! []
   (reset! items []))
 
+(defn clear-ids! []
+  (reset! ids []))
+
 (defn add-item! [item]
   (swap! items conj item))
+
+(defn add-id! [id]
+  (swap! ids conj id))
 
 (defn set-ngroups! [n] (reset! ngroups n))
 
@@ -71,7 +78,7 @@
         (fn [idx itm]
           (->> (map display-item itm)
                (string/join "\n")
-               (#(str "*Group " (inc idx) ":*\n```" (if (not-empty %) % "-") "```\n")))))
+               (#(str "*Group " (inc idx) ":* " (get @ids idx "") "\n```" (if (not-empty %) % "-") "```\n")))))
        (string/join "\n")
        (reset! groups)))
 
