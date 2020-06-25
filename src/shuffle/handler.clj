@@ -51,7 +51,11 @@
 
 (defn clear[]
   (g/clear!)
-  (response 200 "Cleared the list of people."))
+  (response 200 "Cleared the list of items."))
+
+(defn clear-ids []
+  (g/clear-ids!)
+  (response 200 "Cleared the list of ids."))
 
 (defn deal []
   (->> (g/deal)
@@ -70,13 +74,14 @@
           (response 200 (str "Results posted to " channel "."))))))
 
 (defn process-message [{:keys [command text]}]
-  (cond 
-    (= command "/add")    (add-item text)
-    (= command "/clear")  (clear)
-    (= command "/groups") (set-groups (Integer/parseInt text))
-    (= command "/deal")   (g/deal)
-    (= command "/add-id") (add-id text)
-    (= command "/post")   (post-results text)
+  (cond
+    (= command "/add")       (add-item text)
+    (= command "/clear")     (clear)
+    (= command "/clear-ids") (clear-ids)
+    (= command "/groups")    (set-groups (Integer/parseInt text))
+    (= command "/deal")      (g/deal)
+    (= command "/add-id")    (add-id text)
+    (= command "/post")      (post-results text)
     :else (response 400 "Please enter a valid command.")))
 
 (defn slack-handler [{:keys [params]}]
