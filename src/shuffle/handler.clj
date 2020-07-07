@@ -28,18 +28,23 @@
    :headers {"Content-Type" "text/html"}
    :body body})
 
-(defn add-item [text]
-  (let [parsed (string/split text #"\" \"")
-        cleaned (map #(string/replace % "\"" "") parsed)]
-    (if (not (= 2 (count cleaned)))
-      (response 400 "Please enter the name and key of the item you wish to add.")
-      (->> [(first cleaned) (last cleaned)]
-           (g/create-item)
-           (g/add-item!)
-           (map g/display-item)
-           (string/join "\n")
-           (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
-           (response 200)))))
+
+(defn add-item [item]
+  (->> (g/create-item item)
+       (g/add-item!)
+       (map g/display-item)
+       (string/join "\n")
+       (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
+       (response 200)))
+
+(defn add-items [text]
+  (let [tokens (string/split text #",")]
+    (if (> 2 (count tokens))
+      (response 400 "Please enter an even list of items")
+      (->> (partition 2 tokens)
+           (filter (comp even? count))
+           (map add-item)
+           (last)))))
 
 (defn add-id [text]
   (if (< 0 (count text))

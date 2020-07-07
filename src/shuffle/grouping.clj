@@ -31,7 +31,8 @@
 (defn results [] @groups)
 
 (defn display-item
-  [{:keys [name key]}]
+  [{:keys [name key] :as Keybert}]
+  (prn Keybert)
   (str (pad name 40) key))
 
 (defn create-item [[name key]]
