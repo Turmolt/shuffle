@@ -29,10 +29,12 @@
    :body body})
 
 (defn items-response [items]
-  (->> (map g/display-item items)
-       (string/join "\n")
-       (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
-       (response 200)))
+  (if (< 0 (count items))
+    (->> (map g/display-item items)
+         (string/join "\n")
+         (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
+         (response 200))
+    (response 200 "The list is empty.")))
 
 (defn add-item [item]
   (->> (g/create-item item)
@@ -87,7 +89,7 @@
 
 (defn process-message [{:keys [command text]}]
   (cond
-    (= command "/add")       (add-item text)
+    (= command "/add-items")       (add-item text)
     (= command "/clear")     (clear)
     (= command "/remove")    (remove-item text)
     (= command "/clear-ids") (clear-ids)
