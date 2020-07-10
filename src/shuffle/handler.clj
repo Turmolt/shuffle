@@ -29,12 +29,10 @@
    :body body})
 
 (defn items-response [items]
-  (if (< 0 (count items))
-    (->> (map g/display-item items)
-         (string/join "\n")
-         (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
-         (response 200))
-    (response 200 "The list is empty.")))
+  (->> (map g/display-item items)
+       (string/join "\n")
+       (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
+       (response 200)))
 
 (defn add-item [item]
   (->> (g/create-item item)
