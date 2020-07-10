@@ -91,7 +91,7 @@
   (cond
     (= command "/add")       (add-items text)
     (= command "/clear")     (clear)
-    (= command "/remove")    (remove-item text)
+    (= command "/delete")    (remove-item text)
     (= command "/clear-ids") (clear-ids)
     (= command "/groups")    (set-groups (Integer/parseInt text))
     (= command "/deal")      (g/deal)
