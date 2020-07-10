@@ -89,7 +89,7 @@
 
 (defn process-message [{:keys [command text]}]
   (cond
-    (= command "/add-items")       (add-item text)
+    (= command "/add")       (add-items text)
     (= command "/clear")     (clear)
     (= command "/remove")    (remove-item text)
     (= command "/clear-ids") (clear-ids)
