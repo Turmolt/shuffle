@@ -28,23 +28,32 @@
    :headers {"Content-Type" "text/html"}
    :body body})
 
+(defn items-response [items]
+  (if (< 0 (count items))
+    (->> (map g/display-item items)
+         (string/join "\n")
+         (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
+         (response 200))
+    (response 200 "The list is empty.")))
 
 (defn add-item [item]
   (->> (g/create-item item)
        (g/add-item!)
-       (map g/display-item)
-       (string/join "\n")
-       (#(str "```" (g/pad "NAME" 40) "KEY\n" % " ```"))
-       (response 200)))
+       (items-response)))
 
 (defn add-items [text]
-  (let [tokens (string/split text #",")]
+  (let [tokens (string/split text #",")
+        tokens (map string/trim tokens)]
     (if (> 2 (count tokens))
       (response 400 "Please enter an even list of items")
       (->> (partition 2 tokens)
            (filter (comp even? count))
            (map add-item)
            (last)))))
+
+(defn remove-item [text]
+  (-> (swap! g/items (partial remove (fn [{:keys [name]}] (= name text))))
+      (items-response)))
 
 (defn add-id [text]
   (if (< 0 (count text))
@@ -82,10 +91,11 @@
   (cond
     (= command "/add")       (add-item text)
     (= command "/clear")     (clear)
+    (= command "/remove")    (remove-item text)
     (= command "/clear-ids") (clear-ids)
     (= command "/groups")    (set-groups (Integer/parseInt text))
     (= command "/deal")      (g/deal)
-    (= command "/add-id")    (add-id text)
+    (= command "/id")        (add-id text)
     (= command "/post")      (post-results text)
     :else (response 400 "Please enter a valid command.")))
 
