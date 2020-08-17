@@ -12,7 +12,6 @@
 (def token (env :token))
 
 (def auth-token (env :secret))
-(def last-command (atom ""))
 
 (defn slack 
   ([] "https://slack.com/api/")
@@ -89,8 +88,6 @@
           (response 200 (str "Results posted to " channel "."))))))
 
 (defn process-message [{:keys [command text]}]
-  (print text)
-  (reset! last-command (str command " " text))
   (cond
     (= command "/add")       (add-items text)
     (= command "/clear")     (clear)
@@ -110,7 +107,6 @@
 (defroutes app-routes
   (POST "/slack"  [] slack-handler)
   (GET "/slack" [] slack-handler)
-  (GET "/cmd" [] (response 200 @last-command))
   (route/not-found "Not Found!"))
 
 (def app (wrap-defaults app-routes api-defaults))
