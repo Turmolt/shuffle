@@ -10,4 +10,4 @@ pom.xml.asc
 /.nrepl-port
 .vault
 profiles.clj
-*.repl-file
+.calva
