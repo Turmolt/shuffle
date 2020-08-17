@@ -34,8 +34,13 @@
   [{:keys [name key]}]
   (str (pad name 40) key))
 
+(defn hard-trim [text]
+  (if (= 160 (int (first text)))
+    (string/trim (subs text 1 (count text)))
+    (string/trim text)))
+
 (defn create-item [[name key]]
-  (Item. (string/trim name) (string/trim key)))
+  (Item. (hard-trim name) (hard-trim key)))
 
 (defn split 
   "split by the key then shuffle
