@@ -42,8 +42,8 @@
        (items-response)))
 
 (defn add-items [text]
-  (let [tokens (string/split text #",")
-        tokens (map string/trim tokens)]
+  (let [raw-tokens (string/split text #",")
+        tokens (map string/trim raw-tokens)]
     (if (> 2 (count tokens))
       (response 400 "Please enter an even list of items")
       (->> (partition 2 tokens)

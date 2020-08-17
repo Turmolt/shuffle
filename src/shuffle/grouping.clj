@@ -31,12 +31,11 @@
 (defn results [] @groups)
 
 (defn display-item
-  [{:keys [name key] :as Keybert}]
-  (prn Keybert)
+  [{:keys [name key]}]
   (str (pad name 40) key))
 
 (defn create-item [[name key]]
-  (Item. name key))
+  (Item. (string/trim name) (string/trim key)))
 
 (defn split 
   "split by the key then shuffle
