@@ -88,6 +88,7 @@
           (response 200 (str "Results posted to " channel "."))))))
 
 (defn process-message [{:keys [command text]}]
+  (print text)
   (cond
     (= command "/add")       (add-items text)
     (= command "/clear")     (clear)
