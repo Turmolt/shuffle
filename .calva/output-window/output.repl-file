@@ -1,0 +1,246 @@
+; This is the Calva evaluation results output window.
+; Leave it open, please. Because quirks.
+; TIPS: The keyboard shortcut `ctrl+alt+c o` shows and focuses this window.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS: You can edit the contents here. Use it as a REPL if you like.
+;   Use `alt+enter` to evaluate the current top level form.
+;   (`ctrl+enter` evaluates the current form.)
+;   File URLs in stacktrace frames are peekable and clickable.
+; Debugger initialized
+clj::shuffle.handler=> 
+; Jack-in done.
+2
+clj::shuffle.handler=> 
+([{:name "mike", :key "pdx"}]
+ [{:name "mike", :key "pdx"} {:name "sam", :key "sf"}]
+ [{:name "mike", :key "pdx"} {:name "sam", :key "sf"} {:name "alec", :key "sf"}]
+ [{:name "mike", :key "pdx"} {:name "sam", :key "sf"} {:name "alec", :key "sf"} {:name "sara", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}
+  {:name "gonz", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "gonz", :key "sf"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "sara", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "sam", :key "pdx"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "sam", :key "pdx"}
+  {:name "sam", :key "sf"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "sam", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "gonz", :key "sf"}]
+ [{:name "mike", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "sara", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "alec", :key "sf"}
+  {:name "sam", :key "pdx"}
+  {:name "alec", :key "pdx"}
+  {:name "mike", :key "sf"}
+  {:name "mike", :key "pdx"}
+  {:name "scott", :key "pdx"}
+  {:name "gonz", :key "pdx"}
+  {:name "gonz", :key "sf"}
+  {:name "sara", :key "pdx"}
+  {:name "sam", :key "pdx"}
+  {:name "sam", :key "sf"}
+  {:name "gonz", :key "sf"}
+  {:name "sara", :key "sf"}])
+clj::shuffle.grouping=> 
+#shuffle.grouping.Item{:name "alec", :key "sf"}
+#shuffle.grouping.Item{:name "sam", :key "sf"}
+#shuffle.grouping.Item{:name "mike", :key "sf"}
+#shuffle.grouping.Item{:name "scott", :key "pdx"}
+#shuffle.grouping.Item{:name "mike", :key "pdx"}
+#shuffle.grouping.Item{:name "sam", :key "sf"}
+#shuffle.grouping.Item{:name "sara", :key "sf"}
+#shuffle.grouping.Item{:name "sara", :key "pdx"}
+#shuffle.grouping.Item{:name "sam", :key "pdx"}
+#shuffle.grouping.Item{:name "sara", :key "pdx"}
+#shuffle.grouping.Item{:name "gonz", :key "sf"}
+#shuffle.grouping.Item{:name "gonz", :key "sf"}
+#shuffle.grouping.Item{:name "sara", :key "pdx"}
+#shuffle.grouping.Item{:name "alec", :key "pdx"}
+#shuffle.grouping.Item{:name "mike", :key "pdx"}
+#shuffle.grouping.Item{:name "gonz", :key "sf"}
+#shuffle.grouping.Item{:name "alec", :key "sf"}
+#shuffle.grouping.Item{:name "gonz", :key "pdx"}
+#shuffle.grouping.Item{:name "sam", :key "pdx"}
+#shuffle.grouping.Item{:name "gonz", :key "pdx"}
+"*Group 1:* \n```alec                                    sf\nsam                                     sf\nmike                                    sf\nscott                                   pdx\nmike                                    pdx```\n\n*Group 2:* \n```sam                                     sf\nsara                                    sf\nsara                                    pdx\nsam                                     pdx\nsara                                    pdx```\n\n*Group 3:* \n```gonz                                    sf\ngonz                                    sf\nsara                                    pdx\nalec                                    pdx\nmike                                    pdx```\n\n*Group 4:* \n```gonz                                    sf\nalec                                    sf\ngonz                                    pdx\nsam                                     pdx\ngonz                                    pdx```\n"
+clj::shuffle.grouping=> 
+; nREPL Connection was closed
